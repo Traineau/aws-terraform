@@ -7,6 +7,8 @@ resource "aws_elb" "load_balancer" {
 
   enable_deletion_protection = true
 
+// TODO
+/*
   access_logs {
     bucket  = "${aws_s3_bucket.lb_logs.bucket}"
     prefix  = "test-lb"
@@ -16,4 +18,5 @@ resource "aws_elb" "load_balancer" {
   tags = {
     Environment = "production"
   }
+*/
 }
