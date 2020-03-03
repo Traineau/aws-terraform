@@ -5,6 +5,7 @@ provider "aws" {
 resource "aws_autoscaling_group" "symfony_scaling" {
   name = "symfony_scalling"
   stategy = "cluster"
+  
 }
 
 
