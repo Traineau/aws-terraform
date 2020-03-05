@@ -2,21 +2,32 @@ resource "aws_elb" "load_balancer" {
   name               = "load_balancer"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = ["${aws_security_group.lb_sg.id}"]
-  subnets            = ["${aws_subnet.public.*.id}"]
 
   enable_deletion_protection = true
 
-// TODO
-/*
-  access_logs {
-    bucket  = "${aws_s3_bucket.lb_logs.bucket}"
-    prefix  = "test-lb"
-    enabled = true
+  # access_logs {
+  #   bucket  = "${aws_s3_bucket.lb_logs.bucket}"
+  #   prefix  = "test-lb"
+  #   enabled = true
+  # }
+
+  listener {
+    instance_port     = 8000
+    instance_protocol = "http"
+    lb_port           = 80
+    lb_protocol       = "http"
+  }
+
+  health_check {
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+    timeout             = 3
+    target              = "HTTP:8000/"
+    interval            = 30
   }
 
   tags = {
     Environment = "production"
   }
-*/
+
 }

@@ -1,6 +1,12 @@
 resource "aws_autoscaling_group" "symfony_scaling" {
-  name     = "symfony_scalling"
-  stategy  = "cluster"
-  min_size = "2"
-  max_size = "5"
+  availability_zones = "${var.region}"
+  name               = "symfony_scalling"
+  stategy            = "cluster"
+  min_size           = "1"
+  max_size           = "5"
+
+  launch_template {
+    id      = "${aws_launch_template.ec2_instance.id}"
+    version = "$Latest"
+  }
 }
