@@ -6,7 +6,7 @@ resource "aws_autoscaling_group" "symfony_scaling" {
   max_size           = "5"
 
   launch_template {
-    id      = "${aws_launch_template.ec2_instance.id}"
+    id      = "${aws_launch_template.app-instance.id}"
     version = "$Latest"
   }
 }
